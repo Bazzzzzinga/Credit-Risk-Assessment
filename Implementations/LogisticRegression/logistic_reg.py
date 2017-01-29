@@ -50,7 +50,7 @@ def logistic_regression(alpha,iterations,x=trainx,y=trainy):
 theta=logistic_regression(0.0001,1000)
 
 #AccuracyCheck
-a=hthetaofx(remainx,theta)
+a=np.dot(remainx,theta)
 acc=0
 for i in range(len(a)):
 	if a[i]<0:
@@ -59,4 +59,5 @@ for i in range(len(a)):
 		a[i]=1
 	if a[i]==remainy[i]:
 		acc=acc+1
-print "Accuracy is",(1-(acc*1.0)/len(a))*100,"%."
+print "Accuracy is",((acc*1.0)/len(a))*100,"%."
+

@@ -1,6 +1,7 @@
 import os,csv,math
 import numpy as np
 from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.metrics import confusion_matrix, classification_report
 
 #Reading Data
 csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
@@ -34,4 +35,5 @@ acc=0
 for i in range(len(a)):
 	if a[i]==remainy[i]:
 		acc=acc+1
+print "Classification Report: " + classification_report(remainy,a)
 print "Accuracy is",((acc*1.0)/len(a))*100,"%."

@@ -1,6 +1,6 @@
 import os,csv,math
 import numpy as np
-
+from sklearn.metrics import classification_report
 #Reading Data
 csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
 data=[]
@@ -10,11 +10,13 @@ for row in csv_file_object:
 #Splitting data into training,test,crossvalidation data 
 data=np.array(data)
 data=data[2::]
+data=data[:,:].astype(np.float64)
 x=data[:,0:24]
 y=data[:,24]
-x=x[:,:].astype(np.float64)
 x=(x-np.mean(x,axis=0))/np.std(x,axis=0)
-y=y[:].astype(np.float64)
+#finalx=np.ones((30000,25)) #Add a column of all ones for computation of theta0
+#finalx[:,1:25]=x
+#x=finalx
 #y.resize((30000,1))
 trainx=x[0:21000]
 trainy=y[0:21000]
@@ -25,10 +27,8 @@ crossvalidatey=y[21000:25500]
 testx=x[25500:30000]
 testy=y[25500:30000]
 
-#Implementation
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis,QuadraticDiscriminantAnalysis
-model = LinearDiscriminantAnalysis(solver='eigen',shrinkage='auto')
-model.fit(trainx,trainy)
-#print "Accuracy over training data is: ",model.score(trainx,trainy)
-print "Accuracy over test data is: ",model.score(remainx,remainy)
-
+from sklearn.neural_network import MLPClassifier
+clf = MLPClassifier(solver='lbfgs', alpha=1e-1, hidden_layer_sizes=(24, 1), random_state=1)
+clf.fit(trainx, trainy)
+predicty=clf.predict(remainx)
+print classification_report(remainy,predicty)

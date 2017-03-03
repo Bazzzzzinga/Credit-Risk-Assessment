@@ -28,7 +28,12 @@ testx=x[25500:30000]
 testy=y[25500:30000]
 
 from sklearn.neural_network import MLPClassifier
-clf = MLPClassifier(solver='lbfgs', alpha=1e-1, hidden_layer_sizes=(24, 1), random_state=1)
+clf = MLPClassifier(solver='lbfgs', alpha=1e-1, hidden_layer_sizes=(24,), random_state=1)
 clf.fit(trainx, trainy)
 predicty=clf.predict(remainx)
+sum=0
+for i in range(len(predicty)):
+	if(predicty[i]==remainy[i]):
+		sum=sum+1
+print "Accuracy is"+str((sum*1.0)/len(predicty))
 print classification_report(remainy,predicty)

@@ -37,7 +37,7 @@ def forwardpropogation(theta1,theta2,x=remainx):
 	a2=np.ones((len(tempa2),len(tempa2[0])+1))
 	a2[:,1:len(a2[0])]=tempa2
 	a3=g(np.dot(a2,theta2.transpose()))
-	return a3
+	return a3.reshape((1,len(a3)))[0]
 
 def backpropagation(lambdaa,theta1,theta2,x=trainx,y=trainy):
 	bigdelta1=0*theta1
@@ -69,16 +69,22 @@ def neuralnetworks(alpha,iterations,lambdaa):
 		theta1=theta1-alpha*D1
 		theta2=theta2-alpha*D2
 		#print theta1,theta2
+		predictremainy=forwardpropogation(theta1,theta2,remainx)
+		for i in range(len(predictremainy)):
+			if(predictremainy[i]<0.5):
+				predictremainy[i]=0
+			else:
+				predictremainy[i]=1
+			#print predictremainy[i]
+		sum=0
+		for i in range(len(predictremainy)):
+			if(predictremainy[i]==remainy[i]):
+				sum=sum+1
+		print "Accuracy is "+str((sum*1.0)/len(predictremainy))
+		print classification_report(remainy,predictremainy)
 	return theta1,theta2
 
 
-theta1,theta2=neuralnetworks(0.3,10,0.01)
+theta1,theta2=neuralnetworks(0.3,10000,0.01)
 predictremainy=forwardpropogation(theta1,theta2,remainx)
-print predictremainy
-for i in range(len(predictremainy)):
-	#print predictremainy[i]
-	if(predictremainy[i]<0.5):
-		predictremainy[i]=0
-	else:
-		predictremainy[i]=1
-print classification_report(remainy,predictremainy)
+

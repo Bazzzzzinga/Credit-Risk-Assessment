@@ -12,13 +12,13 @@ for row in csv_file_object:
 #Splitting data into training,test,crossvalidation data 
 data=np.array(data)
 data=data[2::]
-x=data[:,0:24]
+x=data[:,1:24]
 y=data[:,24]
-x=x[:,:].astype(np.float128)
+x=x[:,:].astype(np.float64)
 x=(x-np.mean(x,axis=0))/np.std(x,axis=0)
-y=y[:].astype(np.float128)
-finalx=np.ones((30000,25)) #Add a column of all ones for computation of theta0
-finalx[:,1:25]=x
+y=y[:].astype(np.float64)
+finalx=np.ones((30000,24)) #Add a column of all ones for computation of theta0
+finalx[:,1:24]=x
 x=finalx
 trainx=x[0:21000]
 trainy=y[0:21000]

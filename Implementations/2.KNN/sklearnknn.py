@@ -10,12 +10,11 @@ for row in csv_file_object:
 #Splitting data into training,test,crossvalidation data 
 data=np.array(data)
 data=data[2::]
-x=data[:,0:24]
+x=data[:,1:24]
 y=data[:,24]
 x=x[:,:].astype(np.float64)
 x=(x-np.mean(x,axis=0))/np.std(x,axis=0)
 y=y[:].astype(np.float64)
-#y.resize((30000,1))
 trainx=x[0:21000]
 trainy=y[0:21000]
 remainx=x[21000:30000]

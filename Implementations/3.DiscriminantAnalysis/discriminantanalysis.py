@@ -1,5 +1,6 @@
 import os,csv,math
 import numpy as np
+from sklearn.metrics import classification_report
 
 #Reading Data
 csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
@@ -10,12 +11,10 @@ for row in csv_file_object:
 #Splitting data into training,test,crossvalidation data 
 data=np.array(data)
 data=data[2::]
-x=data[:,0:24]
+data=data[:,:].astype(np.float64)
+x=data[:,1:24]
 y=data[:,24]
-x=x[:,:].astype(np.float64)
 x=(x-np.mean(x,axis=0))/np.std(x,axis=0)
-y=y[:].astype(np.float64)
-#y.resize((30000,1))
 trainx=x[0:21000]
 trainy=y[0:21000]
 remainx=x[21000:30000]
@@ -30,5 +29,12 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis,QuadraticDi
 model = LinearDiscriminantAnalysis(solver='eigen',shrinkage='auto')
 model.fit(trainx,trainy)
 #print "Accuracy over training data is: ",model.score(trainx,trainy)
-print "Accuracy over test data is: ",model.score(remainx,remainy)
+#print "Accuracy over test data is: ",model.score(remainx,remainy)
+predicty=model.predict(remainx)
+sum=0
+for i in range(len(predicty)):
+	if(predicty[i]==remainy[i]):
+		sum=sum+1
+print classification_report(remainy,predicty)
+print "Accuracy is"+str((sum*1.0)/len(predicty))
 

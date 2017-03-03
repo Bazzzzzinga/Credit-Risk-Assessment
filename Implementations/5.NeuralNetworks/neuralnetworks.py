@@ -11,11 +11,11 @@ for row in csv_file_object:
 data=np.array(data)
 data=data[2::]
 data=data[:,:].astype(np.float64)
-x=data[:,0:24]
+x=data[:,1:24]
 y=data[:,24]
 x=(x-np.mean(x,axis=0))/np.std(x,axis=0)
-finalx=np.ones((30000,25)) #Add a column of all ones for computation of theta0
-finalx[:,1:25]=x
+finalx=np.ones((30000,24)) #Add a column of all ones for computation of theta0
+finalx[:,1:24]=x
 x=finalx
 #y.resize((30000,1))
 trainx=x[0:21000]

@@ -9,7 +9,7 @@ for row in csv_file_object:
 
 data=np.array(data)
 data=data[2::]
-x=data[:,0:24]
+x=data[:,1:24]
 y=data[:,24:25]
 x=x[:,:].astype(np.float64)
 x=(x-np.mean(x,axis=0))/np.std(x,axis=0)

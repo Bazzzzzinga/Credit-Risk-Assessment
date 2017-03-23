@@ -2,14 +2,13 @@ import os,csv,math
 import numpy as np
 from sklearn.metrics import classification_report
 #Reading Data
-csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
+csv_file_object = csv.reader(open('modcsvdataset.csv', 'rb'))
 data=[]
 for row in csv_file_object:
 	data.append(row)
 
 #Splitting data into training,test,crossvalidation data 
 data=np.array(data)
-data=data[2::]
 data=data[:,:].astype(np.float64)
 x=data[:,1:24]
 y=data[:,24]
@@ -23,8 +22,8 @@ crossvalidatey=y[21000:25500]
 testx=x[25500:30000]
 testy=y[25500:30000]
 
-from sklearn.neural_network import MLPClassifier
-clf = MLPClassifier(solver='lbfgs', alpha=1e-1, hidden_layer_sizes=(24,150), random_state=1)
+from sklearn import svm
+clf = svm.SVC()
 clf.fit(trainx, trainy)
 predicty=clf.predict(remainx)
 sum=0

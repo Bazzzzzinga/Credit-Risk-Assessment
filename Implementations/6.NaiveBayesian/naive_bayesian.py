@@ -40,7 +40,7 @@ pr1=float(len(data1)*1.0/(len(data1)+len(data0)))
 pr0=float(len(data0)*1.0/(len(data1)+len(data0)))
 cnt=0
 predicted=[]
-for i in remainx:
+for i in remainx: 
         pro1=pr1
         pro0=pr0
         for j in range(len(i)):

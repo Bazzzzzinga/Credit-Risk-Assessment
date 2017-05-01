@@ -1,5 +1,6 @@
 import os,csv,math
 import numpy as np
+from sklearn.metrics import classification_report
 
 #Reading Data
 csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
@@ -28,6 +29,10 @@ testy=y[25500:30000]
 from sklearn import tree
 model = tree.DecisionTreeClassifier()
 model.fit(trainx,trainy)
-print "Accuracy over training data is: ",model.score(trainx,trainy)
-print "Accuracy over test data is: ",model.score(remainx,remainy)
-
+predicty=model.predict(remainx)
+sum=0
+for i in range(len(predicty)):
+	if(predicty[i]==remainy[i]):
+		sum=sum+1
+print "Accuracy is"+str((sum*1.0)/len(predicty))
+print classification_report(remainy,predicty)

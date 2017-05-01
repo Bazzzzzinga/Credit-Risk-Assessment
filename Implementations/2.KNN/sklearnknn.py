@@ -1,5 +1,6 @@
 import os,csv,math
 import numpy as np
+from sklearn.metrics import classification_report
 
 #Reading Data
 csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
@@ -29,4 +30,10 @@ from sklearn.neighbors import KNeighborsClassifier
 for i in range(1,51):
 	neigh = KNeighborsClassifier(n_neighbors=i)
 	neigh.fit(trainx, trainy)
-	print i,neigh.score(remainx,remainy)
+	predicty=neigh.predict(remainx)
+	sum=0
+	for j in range(len(predicty)):
+		if(predicty[j]==remainy[j]):
+			sum=sum+1
+	print i,"Accuracy is"+str((sum*1.0)/len(predicty))
+	print classification_report(remainy,predicty)

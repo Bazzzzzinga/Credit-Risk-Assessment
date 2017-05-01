@@ -1,5 +1,6 @@
 import os,csv,math
 import numpy as np
+from sklearn.metrics import classification_report
 
 #Reading Data
 csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
@@ -16,8 +17,8 @@ x=(x-np.mean(x,axis=0))/np.std(x,axis=0)
 y=y[:].astype(np.float64)
 trainx=x[0:21000]
 trainy=y[0:21000]
-remainx=x[21000:30000]
-remainy=y[21000:30000]
+remainx=x[21000:len(x)]
+remainy=y[21000:len(x)]
 
 distance0=[]
 distance1=[]
@@ -42,12 +43,15 @@ for i in range(1,51):
 	distance1[:,i:i+1]=distance1[:,i:i+1]+distance1[:,i-1:i]
 for i in range(0,50):
 	sum=0
+	a=np.ones((len(remainx),1))*2
 	for j in range(len(remainx)):
 		if(distance0[j][i]>distance1[j][i]):
+			a[j]=1
 			if(remainy[j]==1):
 				sum=sum+1
 		else:
+			a[j]=0
 			if(remainy[j]==0):
 				sum=sum+1
 	print "k = ",i+1," Accuracy = ",(sum*1.0)/len(remainy)
-
+	print classification_report(remainy,a)

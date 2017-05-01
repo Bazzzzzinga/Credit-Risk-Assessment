@@ -87,4 +87,3 @@ def neuralnetworks(alpha,iterations,lambdaa):
 
 theta1,theta2=neuralnetworks(0.3,10000,0.01)
 predictremainy=forwardpropogation(theta1,theta2,remainx)
-

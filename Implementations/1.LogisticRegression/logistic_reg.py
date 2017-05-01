@@ -1,5 +1,6 @@
 import os,csv,math
 import numpy as np
+from sklearn.metrics import classification_report
 
 #Reading Data
 csv_file_object = csv.reader(open('csvdataset.csv', 'rb'))
@@ -60,4 +61,4 @@ for i in range(len(a)):
 	if a[i]==remainy[i]:
 		acc=acc+1
 print "Accuracy is",((acc*1.0)/len(a))*100,"%."
-
+print classification_report(remainy,a)

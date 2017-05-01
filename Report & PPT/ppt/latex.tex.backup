@@ -1,0 +1,178 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\title{Latex Report Writing and Presentation}
+\subtitle{}
+\author{Surbhi Saraswat}
+\institute{IIT(BHU), Varanasi}
+\date{}
+
+
+\setbeamertemplate{bibliography item}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{
+	\begin{center}Table Of Contents\end{center}}
+\tableofcontents
+\end{frame}
+
+\section{Presentation}
+\frame{
+\frametitle{Adding Table}
+  \begin{table}
+  \begin{center}
+  \begin{tabular}{|l|p{6cm}|}  \hline
+      \textbf{Sensor} & \textbf{Storage unit}\\ \hline
+      Tmote & 10k RAM and 48k Flash \\ \hline
+      BTnode & 180 Kbyte SRAM, 128 Kbyte Flash ROM, 4 Kbyte EEPROM  \\ \hline
+      CSIRO Fleck & 512K external memory  \\ \hline
+      EYES & 60 Kbytes of program memory and 4 Kbyte EEPROM \\ \hline
+      MicaZ & 4K RAM 128K Flash  \\ \hline
+      Telos & 4K RAM   \\ \hline
+      \end{tabular}\label{cht2}
+  \end{center}
+  \caption{Illustration of storage units in WSNs.}
+  \end{table}
+}
+
+\frame{
+		\frametitle{Adding Columns}
+		Defining document class for presentation. Adding Table of Contents.
+ 		\begin{columns}[onlytextwidth]
+		 \begin{column}{.45\textwidth} 
+			\begin{itemize}
+			\item \textbf{Control Plane}
+			 	\begin{itemize}
+					\item Control Plane
+					\item Data Plane
+				\end{itemize}
+			\item \textbf{Data Plane}
+			 	\begin{itemize}
+					\item Control Plane
+					\item Data Plane
+				\end{itemize}		
+			\end{itemize}
+			\end{column}
+			\begin{column}{.45\textwidth}
+			\begin{figure}\includegraphics{1.png}
+			\end{figure}
+			\end{column}
+			\end{columns}
+			
+			
+}
+
+\frame{
+\frametitle{SDN and Ubiquitous Computing}
+SDN deployment will enable Ubiquitous Devices to
+\begin{itemize} \item {share network resources efficiently and reliably}
+\item{ reduce hardware investment}
+\item{ use the configuration flexibility offered by SDN}
+\item{ design a scalable network using Network Function Virtualization }
+\end{itemize}
+}
+
+\begin{frame}{}
+	\centering \huge
+	\emph{Emerging Challanges in SDN Development}
+	
+\end{frame}
+
+\section{Network Design}
+\frame{
+	\frametitle{Logically Centralized?}
+		\begin{columns}[onlytextwidth]
+			\begin{column}{.45\textwidth}
+			   \textbf{Single Controller}
+				   	\\- Efficient in performance
+				   	\\- Not Scalable
+				   	\\- Not Fault-tolerant
+				   	\\ .
+ 			 \end{column}
+				  \hfill
+	       \begin{column}{.45\textwidth}
+		    	\textbf{Distributed Controllers}
+		    		\\- Placement issues
+		    		\\- Inconsistencies in network
+		    		\linebreak
+		    		\linebreak
+		   \end{column}
+		   \hfill
+	   \end{columns}
+	   
+	   \textbf{Given a Topology How many Controllers are required? And their location?}\\
+	   \begin{itemize}
+	   			\item {The Controller Placement Problem \cite{heller2012controller}}
+	   			 			\\-Latency Metrices
+	   			 			   			 			
+	   			\item {Five Nines of Southbound Reliability in SDN \cite{ros2014five}}
+	   			 			\\-Connectivity Matrices
+	   			 		
+	   			\end{itemize}
+}
+
+
+
+\frame{
+	\frametitle{Distributed Controllers}
+	   \textbf{Research solutions }\\
+	   \begin{itemize}
+	   			\item {Kandoo framework \cite{hassas2012kandoo}} 
+	   			\item {Orion: A Hybrid Hierarchical Control Plane \cite{fu2014orion}} 
+	   				\\Local, Domain and Central Controller    			 			   			 			
+	   			\item {HotSwap, Walk the line and Incremental Update \cite{vanbever2013hotswap}}	   			 		
+	   			\end{itemize}
+	   			\begin{columns}[onlytextwidth]
+	   					  \begin{column}{.8\textwidth}
+	   					   \centering \begin{figure}\pgfimage[width=\textwidth]{/home/surbhi/Pictures/extras/SDN/Selection_038.png}
+	   					   		\caption{Distributed Controllers}
+	   					   \end{figure}
+	   					   \end{column}
+	   					   \end{columns}
+}
+
+\frame{
+	\frametitle{Data Plane Challanges}
+	\begin{itemize}
+	\item {High level Policy features - Low level switch flow rules}
+	\item{Forwarding rules: Switch Flow Tables in Ternary Content- Addressable Memories (TCAMs)}
+	\\ -Limited Storage
+	\\ -Expensive
+	\item {Packet Forwarding: Header Match}
+	\\- Only L2-L4 matching
+	\\- Unmatched packest send to controllers
+	\item {Dynamic Network -Frequet Flow Updates}
+	  	\end{itemize}
+	   			
+}
+
+\frame{
+	\frametitle{Programmable Data Plane}
+	\begin{itemize}
+	\item {Rule caching \cite{yan2014cab}}
+	\item {Application aware Packet Handling \cite{mekky2014application}}
+	\item {Flow level State Transitions \cite{moshref2014flow} }
+	\item {Protocol Independent Instruction Set \cite{song2013protocol}}
+	  	\end{itemize}
+	  	\begin{columns}[onlytextwidth]
+	  		  \begin{column}{.45\textwidth}  					   \centering \begin{figure}\pgfimage[width=\textwidth]{/home/surbhi/Pictures/extras/SDN/Selection_041.png}
+	  		   	\end{figure}
+	  		   \end{column}
+	  		   \begin{column}{.45\textwidth}
+	  		   	  \centering \begin{figure}\pgfimage[width=\textwidth]{/home/surbhi/Pictures/extras/SDN/Selection_040.png}
+	  		     \end{figure}
+	  		   	  \end{column}
+	  		     \end{columns}	   			
+}
+
+
+\begin{frame}{}
+	\centering \huge
+	\emph{Thank You}
+	
+\end{frame}
+
+\end{document}
